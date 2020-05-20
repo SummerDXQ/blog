@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 后台登陆路由
+// Login
 Route::get('/admin/login','Admin\LoginController@login');
+// Captcha
+Route::get('admin/captcha', "Admin\LoginController@captcha");
 

@@ -22,11 +22,15 @@
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
-            <input name="username" placeholder="Username"  type="text" lay-verify="required" class="layui-input" >
+            <input name="username" placeholder="username"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="Password"  type="password" class="layui-input">
+            <input name="password" lay-verify="required" placeholder="password"  type="password" class="layui-input">
             <hr class="hr15">
-            <input value="Login" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <input name="captcha" lay-verify="required" placeholder="captcha"  type="text" class="layui-input" style="width:50%;float:left;">
+            <div style="height:50px;padding:5px;float:right;">
+                <img src="http://localhost:8080/blog/blog/public/admin/captcha" alt="captcha" id="codeimg" >
+            </div>
+            <input value="Login" lay-submit lay-filter="login" style="width:100%;margin-top:15px;" type="submit">
             <hr class="hr20" >
         </form>
     </div>
@@ -47,8 +51,12 @@
                 return false;
               });
             });
-        })
 
+            $('#codeimg').click(function(){
+                this.src='http://localhost:8080/blog/blog/public/admin/captcha?code='+Math.random();
+            })
+        })
+        
         
     </script>
 

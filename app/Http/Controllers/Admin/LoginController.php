@@ -75,8 +75,16 @@ class LoginController extends Controller
     public function index(){
         return view('admin.index');
     }
+    // welcome page
     public function welcome(){
         return view('admin.welcome');
+    }
+    // logout
+    public function logout(){
+        // clear session
+        session()->flush();
+        // redirect to login page
+        return redirect('admin/login');
     }
 
 }

@@ -11,17 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+    // Login
+    Route::get('login','LoginController@login');
+    // Captcha
+    Route::get('captcha', "LoginController@captcha");
+    // Validate login
+    Route::post('doLogin', "LoginController@doLogin");
 });
 
-// Login
-Route::get('/admin/login','Admin\LoginController@login');
-// Captcha
-Route::get('/admin/captcha', "Admin\LoginController@captcha");
-// Validate login
-Route::post('/admin/doLogin', "Admin\LoginController@doLogin");
-// Home page
-Route::get('/admin/index', "Admin\LoginController@index");
-// Welcome page
-Route::get('/admin/welcome', "Admin\LoginController@welcome");
+
+// Add middle to check authority 
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
+    // Home page
+    Route::get('index', "LoginController@index");
+    // Welcome page
+    Route::get('welcome', "LoginController@welcome");
+    // Logout
+    Route::get('logout', "LoginController@logout");
+});

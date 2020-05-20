@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
 use Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
@@ -31,7 +33,6 @@ class LoginController extends Controller
     }
 
     public function doLogin(Request $request){
-        print_r('111');
         // get data from form
         $input = $request->except('_token');
         $rule = [
@@ -53,5 +54,21 @@ class LoginController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
+        // validate captcha
+        if($input['captcha'] != session()->get('captchaSession')){
+            return redirect('/admin/login')->with('errors','验证码错误');
+        }
+        // connect database and validate user info
+        $user = User::where('user_name',$input['username'])->first();
+        if(!$user){
+            return redirect('admin/login')->with('errors','用户名不正确');
+        }
+        if($input['password'] != Crypt::decrypt($user->user_pass)){
+            return redirect('admin/login')->with('errors','密码不正确');
+        }
+        // store user info into session
+        session()->put('user',$user);
+        // redirect to home page
+        return redirect('admin/index');
     }
 }

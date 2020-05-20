@@ -19,6 +19,5 @@ Route::get('/', function () {
 Route::get('/admin/login','Admin\LoginController@login');
 // Captcha
 Route::get('/admin/captcha', "Admin\LoginController@captcha");
-// 
+// Validate login
 Route::post('/admin/doLogin', "Admin\LoginController@doLogin");
-

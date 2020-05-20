@@ -16,11 +16,11 @@
 
 </head>
 <body class="login-bg">
-    
+
     <div class="login layui-anim layui-anim-up">
         <div class="message">Blog Management System</div>
         <!-- Error Message -->
-        @if (count($errors) > 0)
+        @if ( is_object($errors))
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -28,6 +28,8 @@
                     @endforeach
                 </ul>
             </div>
+        @else
+            {{Session::get('errors')}}
         @endif
         <div id="darkbannerwrap"></div>
         <form method="post" class="layui-form" action="http://localhost:8080/blog/blog/public/admin/doLogin">
@@ -66,11 +68,11 @@
                 this.src='http://localhost:8080/blog/blog/public/admin/captcha?code='+Math.random();
             })
         })
-        
-        
+
+
     </script>
 
-    
+
     <!-- 底部结束 -->
     <script>
     //百度统计可去掉
@@ -78,7 +80,7 @@
     (function() {
       var hm = document.createElement("script");
       hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
+      var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
     </script>

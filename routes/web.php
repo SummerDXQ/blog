@@ -21,3 +21,7 @@ Route::get('/admin/login','Admin\LoginController@login');
 Route::get('/admin/captcha', "Admin\LoginController@captcha");
 // Validate login
 Route::post('/admin/doLogin', "Admin\LoginController@doLogin");
+// Home page
+Route::get('/admin/index', "Admin\LoginController@index");
+// Welcome page
+Route::get('/admin/welcome', "Admin\LoginController@welcome");

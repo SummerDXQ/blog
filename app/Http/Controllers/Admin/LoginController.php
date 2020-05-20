@@ -55,7 +55,7 @@ class LoginController extends Controller
                     ->withInput();
         }
         // validate captcha
-        if($input['captcha'] != session()->get('captchaSession')){
+        if(strtolower($input['captcha']) != strtolower(session()->get('captchaSession'))){
             return redirect('/admin/login')->with('errors','验证码错误');
         }
         // connect database and validate user info
@@ -71,4 +71,12 @@ class LoginController extends Controller
         // redirect to home page
         return redirect('admin/index');
     }
+    //Home page
+    public function index(){
+        return view('admin.index');
+    }
+    public function welcome(){
+        return view('admin.welcome');
+    }
+
 }

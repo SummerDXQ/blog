@@ -21,7 +21,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 });
 
 
-// Add middle to check authority 
+// Add middle to check authority
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
     // Home page
     Route::get('index', "LoginController@index");
@@ -29,4 +29,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     Route::get('welcome', "LoginController@welcome");
     // Logout
     Route::get('logout', "LoginController@logout");
+    //
+    Route::post('user/del', "UserController@delAll");
+    //User model
+    Route::resource('user','UserController');
 });

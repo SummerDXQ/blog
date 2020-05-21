@@ -33,6 +33,7 @@ class LoginController extends Controller
     }
 
     public function doLogin(Request $request){
+        print_r('111');
         // get data from form
         $input = $request->except('_token');
         $rule = [

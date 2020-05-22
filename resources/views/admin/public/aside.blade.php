@@ -50,14 +50,20 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
-                    <cite>订单管理</cite>
+                    <cite>Cate Management</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="order-list.html">
+                        <a _href="{{url('admin/cate')}}">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
+                            <cite>Category List</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{url('admin/cate/create')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Add Category</cite>
                         </a>
                     </li >
                 </ul>

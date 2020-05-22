@@ -33,7 +33,6 @@ class LoginController extends Controller
     }
 
     public function doLogin(Request $request){
-        print_r('111');
         // get data from form
         $input = $request->except('_token');
         $rule = [
@@ -91,4 +90,10 @@ class LoginController extends Controller
     public function noaccess(){
         return view('errors.errors');
     }
+
+
+//    public function jm(){
+//        return Crypt::encrypt('123456');
+////        return view('admin.welcome');
+//    }
 }

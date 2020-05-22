@@ -46,21 +46,6 @@
 
     <script>
         $(function  () {
-            // layui.use('form', function(){
-            //   var form = layui.form;
-            //   // layer.msg('玩命卖萌中', function(){
-            //   //   //关闭后的操作
-            //   //   });
-            //   //监听提交
-            //   form.on('submit(login)', function(data){
-            //     // alert(888)
-            //     layer.msg(JSON.stringify(data.field),function(){
-            //         location.href='index.html'
-            //     });
-            //     return false;
-            //   });
-            // });
-
             $('#codeimg').click(function(){
                 this.src='http://localhost:8080/blog/blog/public/admin/captcha?code='+Math.random();
             })

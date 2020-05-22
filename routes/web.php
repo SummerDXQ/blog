@@ -20,6 +20,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('doLogin', "LoginController@doLogin");
     // no permission
     Route::get('noaccess', "LoginController@noaccess");
+
+//    Route::get('jm','LoginController@jm');
 });
 
 
@@ -41,5 +43,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','H
     Route::get('role/auth/{id}','RoleController@auth');
     Route::post('role/doAuth','RoleController@doAuth');
     //Permission model
-//    Route::resource('role','PermissionController');
+    Route::resource('role','PermissionController');
+    //Category model
+    Route::resource('cate','CateController');
+    // change category order
+    Route::post('cate/changeorder','CateController@changeOrder');
 });

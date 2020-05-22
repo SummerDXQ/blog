@@ -87,5 +87,8 @@ class LoginController extends Controller
         // redirect to login page
         return redirect('admin/login');
     }
-
+    // no permission
+    public function noaccess(){
+        return view('errors.errors');
+    }
 }

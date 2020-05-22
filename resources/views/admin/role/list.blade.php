@@ -31,22 +31,22 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" method="get" action="{{url('admin/user')}}">
-            <div class="layui-input-inline">
-                <select name="num" lay-filter="aihao">
-                    <option value="3" @if($request->input('num') == 3) selected @endif>3</option>
-                    <option value="5" @if($request->input('num') == 5) selected @endif>5</option>
-                </select>
-            </div>
-          <input type="text" name="username" value="{{$request->input('username')}}" placeholder="input username" autocomplete="off" class="layui-input">
-            <input type="text" name="email" value="{{$request->input('email')}}" placeholder="input email" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+{{--        <form class="layui-form layui-col-md12 x-so" method="get" action="{{url('admin/user')}}">--}}
+{{--            <div class="layui-input-inline">--}}
+{{--                <select name="num" lay-filter="aihao">--}}
+{{--                    <option value="3" @if($request->input('num') == 3) selected @endif>3</option>--}}
+{{--                    <option value="5" @if($request->input('num') == 5) selected @endif>5</option>--}}
+{{--                </select>--}}
+{{--            </div>--}}
+{{--          <input type="text" name="username" value="{{$request->input('username')}}" placeholder="input username" autocomplete="off" class="layui-input">--}}
+{{--            <input type="text" name="email" value="{{$request->input('email')}}" placeholder="input email" autocomplete="off" class="layui-input">--}}
+{{--          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
+{{--        </form>--}}
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>Batch Remove</button>
         <button class="layui-btn" onclick="x_admin_show('Add User','{{url('admin/user/create')}}',600,400)"><i class="layui-icon"></i>Add</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px"></span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -55,28 +55,28 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Status</th>
+            <th>Role Name</th>
             <th>Operation</th></tr>
         </thead>
         <tbody>
-        @foreach($user as $v)
+        @foreach($role as $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{$v->user_id}}'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{$v->id}}'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->user_id}}</td>
-            <td>{{$v->user_name}}</td>
-            <td>{{$v->user_email}}</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+            <td>{{$v->id}}</td>
+            <td>{{$v->role_name}}</td>
+{{--            <td class="td-status">--}}
+{{--              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>--}}
             <td class="td-manage">
-              <a title="Edit"  onclick="x_admin_show('Edit','{{url('admin/user/'.$v->user_id.'/edit')}}',600,400)" href="javascript:;">
+                <a title="Grant" href="{{url('admin/role/auth/'.$v->id)}}">
+                    <i class="layui-icon">&#xe612;</i>
+                </a>
+              <a title="Edit"  onclick="x_admin_show('Edit','{{url('admin/user/'.$v->id.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
                 <input type="hidden" name="_token" value="dTLnwzObzzQI3gWvCL8UDvkvb9mwDP8YKdNUfVMz">
-              <a title="删除" onclick="member_del(this,{{$v->user_id}})" href="javascript:;">
+              <a title="删除" onclick="member_del(this,{{$v->id}})" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -84,9 +84,9 @@
         @endforeach
         </tbody>
       </table>
-      <div class="page">
-          {{$user->appends($request->all())->render()}}
-      </div>
+{{--      <div class="page">--}}
+{{--          {{$user->appends($request->all())->render()}}--}}
+{{--      </div>--}}
 
     </div>
     <script>

@@ -18,11 +18,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('captcha', "LoginController@captcha");
     // Validate login
     Route::post('doLogin', "LoginController@doLogin");
+    // no permission
+    Route::get('noaccess', "LoginController@noaccess");
 });
 
 
+
 // Add middle to check authority
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','HasRole']],function(){
     // Home page
     Route::get('index', "LoginController@index");
     // Welcome page
@@ -33,4 +36,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     Route::post('user/del', "UserController@delAll");
     //User model
     Route::resource('user','UserController');
+    //Role model
+    Route::resource('role','RoleController');
+    Route::get('role/auth/{id}','RoleController@auth');
+    Route::post('role/doAuth','RoleController@doAuth');
+    //Permission model
+//    Route::resource('role','PermissionController');
 });

@@ -48,4 +48,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','H
     Route::resource('cate','CateController');
     // change category order
     Route::post('cate/changeorder','CateController@changeOrder');
+    //Article model
+    Route::resource('article','ArticleController');
+    // Upload
+    Route::post('article/upload','ArticleController@upload');
 });

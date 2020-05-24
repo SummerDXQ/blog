@@ -6,8 +6,25 @@ use App\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CateController extends Controller
+class ArticleController extends Controller
 {
+    // Upload file
+    public function upload(Request $request){
+
+        $file = $request->file("file1");
+
+        if($file->isValid()){
+            // get original file's extension
+            $ext = $file -> getClientOriginalExtension();
+            // store files
+            $path = $file->store(date('Ymd'));
+            if(!$path){
+                return response()->json(['ServerNo'=>'400','ResultData'=>'Upload Fail!']);
+            }
+            return response()->json(['ServerNo'=>'200','ResultData'=>$path]);
+        }
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +32,10 @@ class CateController extends Controller
      */
     public function index()
     {
-        //get category list
-        $cates = (new Cate())->tree();
+        // get all categories
+//        $cates = (new Cate())->tree();
 //        return $cates;
-        return view('admin.cate.list',['cates'=>$cates]);
+//        return view('admin.article.add',['cates' => $cates]);
     }
 
     /**
@@ -28,9 +45,8 @@ class CateController extends Controller
      */
     public function create()
     {
-        // get first category
-        $cate = Cate::where('cate_pid',0)->get();
-        return view('admin.cate.add',['cate'=>$cate]);
+        $cates = (new Cate())->tree();
+        return view('admin.article.add',['cates' => $cates]);
     }
 
     /**
@@ -41,16 +57,7 @@ class CateController extends Controller
      */
     public function store(Request $request)
     {
-        // receive adding category
-        $input = $request->except('_token');
-        // validate data
-        // store data into database
-        $res = Cate::create($input);
-        if($res){
-            return redirect('admin/cate');
-        }else{
-            return back();
-        }
+        //
     }
 
     /**
@@ -96,26 +103,5 @@ class CateController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    //change order
-    public function changeOrder(Request $request){
-        $input = $request->except('_token');
-        // get current category
-        $cate = Cate::find($input['cate_id']);
-        // update order
-        $res = $cate->update(['cate_order'=>$input['cate_order']]);
-        if($res){
-            $data = [
-                'status'=>0,
-                'msg'=>'Update Successfully!'
-            ];
-        }else{
-            $data = [
-                'status'=>1,
-                'msg'=>'Update Fail!'
-            ];
-        }
-        return $data;
     }
 }

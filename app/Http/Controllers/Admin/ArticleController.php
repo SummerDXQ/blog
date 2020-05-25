@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Article;
 use App\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,10 +33,28 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // store all articles
+//        $arts = [];
+//        // use redis
+//        $listkey = 'LIST:ARTICLE';   //store article id
+//        $hashkey = 'HASH:ARTICLE';
+//        if(\Redis::exists($listkey)){
+//            $list = Redis::lrange($listkey,0,-1);
+//            foreach ($list as $k=>$v){
+//                $arts[] = \Redis::hGetall($hashkey.$v);
+//            }
+//        }else{
+//            //get all articles from database
+//            $arts = Article::get()->toArray();
+//            //store article id in redis
+//            foreach ($arts as $k=>$v){
+//                \Redis::rpush($listkey,$v['art_id']);
+//                \Redis::hMset($hashkey.$v['art_id'],$v);
+//            }
+//        }
         // get all categories
-//        $cates = (new Cate())->tree();
-//        return $cates;
-//        return view('admin.article.add',['cates' => $cates]);
+        $arts = Article::get()->toArray();
+        return view('admin.article.list',['arts' => $arts]);
     }
 
     /**

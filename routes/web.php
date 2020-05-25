@@ -52,4 +52,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','H
     Route::resource('article','ArticleController');
     // Upload
     Route::post('article/upload','ArticleController@upload');
+    //web config
+    Route::resource('config','ConfigController');
 });

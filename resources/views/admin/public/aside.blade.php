@@ -90,6 +90,27 @@
                     </li >
                 </ul>
             </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>Web Configuration</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{{url('admin/config')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Configuration List</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{{url('admin/config/create')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Add Configuration</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
 {{--            <li>--}}
 {{--                <a href="javascript:;">--}}
 {{--                    <i class="iconfont">&#xe723;</i>--}}
